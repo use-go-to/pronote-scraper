@@ -75,8 +75,14 @@ async def get_or_create_session():
 
 async def login_toutatice(page, username: str, password: str):
     try:
+        import socket
+        try:
+            socket.create_connection(("www.toutatice.fr", 443), timeout=5)
+            log.info("Réseau OK - toutatice.fr accessible ✅")
+        except Exception as ne:
+            log.error(f"Réseau KO - toutatice.fr inaccessible ❌ : {ne}")
         log.info("Étape 1 : Navigation vers toutatice.fr...")
-        await page.goto("https://www.toutatice.fr/", wait_until="domcontentloaded", timeout=30000)
+        await page.goto("https://www.toutatice.fr/", wait_until="domcontentloaded", timeout=60000)
         await page.wait_for_timeout(2000)
         log.info(f"Page chargée : {page.url}")
 
