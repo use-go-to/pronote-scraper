@@ -46,6 +46,11 @@ async def get_or_create_session():
                 "--disable-dev-shm-usage",
                 "--disable-gpu",
                 "--single-process",
+                "--no-zygote",
+                "--disable-software-rasterizer",
+                "--disable-extensions",
+                "--disable-background-networking",
+                "--mute-audio",
             ]
         )
         context = await browser.new_context(
